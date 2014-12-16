@@ -9,10 +9,10 @@ class DomoVodApp(App):
 
     def build(self):
         layout = GridLayout(cols=2)
-        dimmer1 = Dimmer()
-        dimmer2 = Dimmer()
-        dimmer3 = Dimmer()
-        relay1 = Relay()
+        dimmer1 = Dimmer('Dimmer 1')
+        dimmer2 = Dimmer('Dimmer 2')
+        dimmer3 = Dimmer('Dimmer 3')
+        relay1 = Relay('Relay 1')
         layout.add_widget(dimmer1)
         layout.add_widget(dimmer2)
         layout.add_widget(dimmer3)
