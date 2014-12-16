@@ -19,7 +19,7 @@ class Dimmer(RelativeLayout):
         self.textures = {k: CoreImage('data/bulb/%03d.png' % k).texture
                          for k in range(0, 101, 5)}
         self.slider = Slider(min=0, max=100, step=1, orientation='vertical')
-        self.slider.size_hint = (.2, None)
+        self.slider.size_hint = (.3, None)
         self.image = ImageButton(allow_stretch=True)
         self.image.pos_hint = {'center_x': .5, 'center_y': .6}
         self.image.size_hint_y = .8
@@ -49,8 +49,8 @@ class Dimmer(RelativeLayout):
 
     def on_image_size(self, _, value):
         self.slider.height = .9 * value[1]
-        ratio = value[0] / value[1]
-        pos = .9 if ratio < 1 else .5 + .4 / ratio
+        ratio = value[0] / value[1] / .75
+        pos = .9 if ratio < 1 else .6 + .3 / ratio
         self.slider.pos_hint = {'center_x': pos, 'center_y': .6}
 
     def on_slider_value(self, _, value):
