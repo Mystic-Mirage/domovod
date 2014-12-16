@@ -10,7 +10,7 @@ __version__ = '0.1'
 
 
 if __name__ == '__main__':
-    Config.set('graphics', 'width', '320')
-    Config.set('graphics', 'height', '480')
+    Config.set('graphics', 'width', '240')
+    Config.set('graphics', 'height', '400')
 
     DomoVodApp().run()
