@@ -8,6 +8,7 @@ from domovod.widgets.relay import Relay
 class DomoVodApp(App):
 
     def build(self):
+        self.use_kivy_settings = False
         layout = GridLayout(cols=2, padding=30, spacing=30)
         dimmer1 = Dimmer('Dimmer 1')
         dimmer2 = Dimmer('Dimmer 2')
@@ -23,4 +24,7 @@ class DomoVodApp(App):
         return True
 
     def on_resume(self):
+        pass
+
+    def open_settings(self, *_):
         pass
