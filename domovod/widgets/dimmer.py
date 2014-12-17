@@ -17,7 +17,7 @@ class Dimmer(RelativeLayout):
     def __init__(self, label, value=0):
         super(Dimmer, self).__init__()
         self.textures = {k: CoreImage('data/bulb/%03d.png' % k).texture
-                         for k in range(0, 101, 5)}
+                         for k in range(0, 101)}
         self.slider = Slider(min=0, max=100, step=1, orientation='vertical')
         self.slider.size_hint = (.3, None)
         self.image = ImageButton(allow_stretch=True)
@@ -36,7 +36,7 @@ class Dimmer(RelativeLayout):
         self.saved_state = 75
 
     def change(self, value):
-        self.image.texture = self.textures[int(value // 5 * 5)]
+        self.image.texture = self.textures[int(value)]
 
     def on_image_press(self):
         if self.slider.value == 0:
