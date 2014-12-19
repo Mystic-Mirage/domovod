@@ -1,0 +1,38 @@
+#:kivy 1.9
+
+<ImageButton@ToggleButtonBehavior+Image>:
+	allow_stretch: True
+
+<Dimmer>:
+	image: image
+	slider: slider
+	ImageButton:
+		id: image
+		on_press: root.on_press()
+		pos_hint: {'center_y': .6}
+		size_hint_y: .8
+	Slider:
+		id: slider
+		min: 0
+		max: 100
+		step: 1
+		on_value: root.on_value()
+		orientation: 'vertical'
+		pos_hint: {'center_x': .5 + .4 * image.height / image.width, 'center_y': .6}
+		size_hint: (.3, .8)
+	Label:
+	    text: root.label
+        pos_hint: {'center_y': .1 * image.height / image.width}
+        size_hint_y: .2
+
+<Relay>:
+	image: image
+	ImageButton:
+		id: image
+		on_press: root.on_press()
+		pos_hint: {'center_y': .6}
+		size_hint_y: .8
+	Label:
+	    text: root.label
+        pos_hint: {'center_y': .1 * image.height / image.width}
+        size_hint_y: .2

@@ -1,14 +1,14 @@
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 
-from domovod.widgets.dimmer import Dimmer
-from domovod.widgets.relay import Relay
+from domovod.widgets import Dimmer, Relay
 
 
 class DomoVodApp(App):
 
+    use_kivy_settings = False
+
     def build(self):
-        self.use_kivy_settings = False
         layout = GridLayout(cols=2, padding=30, spacing=30)
         dimmer1 = Dimmer('Dimmer 1')
         dimmer2 = Dimmer('Dimmer 2')
