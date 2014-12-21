@@ -1,7 +1,8 @@
 from __future__ import division
 
 from kivy.core.image import Image
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import ListProperty, NumericProperty, ObjectProperty, StringProperty
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.relativelayout import RelativeLayout
 
 
@@ -9,8 +10,11 @@ OFF = 0
 ON = 100
 
 
-class Dimmer(RelativeLayout):
+class Root(GridLayout):
+    pass
 
+
+class Dimmer(RelativeLayout):
     image = ObjectProperty()
     slider = ObjectProperty()
     label = StringProperty()
@@ -49,7 +53,6 @@ class Dimmer(RelativeLayout):
 
 
 class Relay(RelativeLayout):
-
     image = ObjectProperty()
     label = StringProperty()
 

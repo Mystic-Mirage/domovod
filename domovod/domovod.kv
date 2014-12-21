@@ -1,38 +1,42 @@
 #:kivy 1.9
 
-<ImageButton@ToggleButtonBehavior+Image>:
-	allow_stretch: True
+<Root>:
+    cols: 2
+    padding: 30
+    spacing: 30
+
+<BulbImage@ToggleButtonBehavior+Image>:
+    allow_stretch: True
+    pos_hint: {'center_y': .6}
+    size_hint_y: .8
+
+<BulbLabel@Label>:
+    size_hint_y: .2
 
 <Dimmer>:
-	image: image
-	slider: slider
-	ImageButton:
-		id: image
-		on_press: root.on_press()
-		pos_hint: {'center_y': .6}
-		size_hint_y: .8
-	Slider:
-		id: slider
-		min: 0
-		max: 100
-		step: 1
-		on_value: root.on_value()
-		orientation: 'vertical'
-		pos_hint: {'center_x': .5 + .4 * image.height / image.width, 'center_y': .6}
-		size_hint: (.3, .8)
-	Label:
-	    text: root.label
+    image: image
+    slider: slider
+    BulbImage:
+        id: image
+        on_press: root.on_press()
+    Slider:
+        id: slider
+        min: 0
+        max: 100
+        step: 1
+        on_value: root.on_value()
+        orientation: 'vertical'
+        pos_hint: {'right': .7 + .3 * image.height / image.width, 'center_y': .6}
+        size_hint: (.3, .8)
+    BulbLabel:
         pos_hint: {'center_y': .1 * image.height / image.width}
-        size_hint_y: .2
+        text: root.label
 
 <Relay>:
-	image: image
-	ImageButton:
-		id: image
-		on_press: root.on_press()
-		pos_hint: {'center_y': .6}
-		size_hint_y: .8
-	Label:
-	    text: root.label
+    image: image
+    BulbImage:
+        id: image
+        on_press: root.on_press()
+    BulbLabel:
         pos_hint: {'center_y': .1 * image.height / image.width}
-        size_hint_y: .2
+        text: root.label

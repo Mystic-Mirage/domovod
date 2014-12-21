@@ -1,7 +1,6 @@
 from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
 
-from domovod.widgets import Dimmer, Relay
+from domovod.widgets import Root, Dimmer, Relay
 
 
 class DomoVodApp(App):
@@ -9,7 +8,7 @@ class DomoVodApp(App):
     use_kivy_settings = False
 
     def build(self):
-        layout = GridLayout(cols=2, padding=30, spacing=30)
+        layout = Root()
         dimmer1 = Dimmer('Dimmer 1')
         dimmer2 = Dimmer('Dimmer 2')
         dimmer3 = Dimmer('Dimmer 3')
