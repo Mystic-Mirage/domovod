@@ -1,15 +1,10 @@
 from kivy.core.image import Image
 from kivy.properties import ObjectProperty, StringProperty
-from kivy.uix.gridlayout import GridLayout
 from kivy.uix.relativelayout import RelativeLayout
 
 
 OFF = 0
 ON = 100
-
-
-class Root(GridLayout):
-    pass
 
 
 class Dimmer(RelativeLayout):
