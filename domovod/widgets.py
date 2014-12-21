@@ -1,7 +1,5 @@
-from __future__ import division
-
 from kivy.core.image import Image
-from kivy.properties import ListProperty, NumericProperty, ObjectProperty, StringProperty
+from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.relativelayout import RelativeLayout
 
