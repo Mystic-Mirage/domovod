@@ -26,8 +26,8 @@
         step: 1
         on_value: root.on_value()
         orientation: 'vertical'
-        pos_hint: {'right': .7 + .3 * image.height / image.width, 'center_y': .6}
-        size_hint: (.3, .8)
+        pos_hint: {'center_x': .6 + .25 * image.height / image.width, 'center_y': .6}
+        size_hint: (.3 * image.height / image.width, .8)
     BulbLabel:
         pos_hint: {'center_y': .1 * image.height / image.width}
         text: root.label
