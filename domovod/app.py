@@ -9,14 +9,9 @@ class DomoVodApp(App):
 
     def build(self):
         self.root.prev.title = 'Room 1'
-        dimmer1 = Dimmer('Dimmer 1')
-        dimmer2 = Dimmer('Dimmer 2')
-        dimmer3 = Dimmer('Dimmer 3')
-        relay1 = Relay('Relay 1')
-        self.root.grid.add_widget(dimmer1)
-        self.root.grid.add_widget(dimmer2)
-        self.root.grid.add_widget(dimmer3)
-        self.root.grid.add_widget(relay1)
+        for Unit in (Dimmer, Relay):
+            for i in range(1, 4):
+                self.root.grid.add_widget(Unit('%s %i' % (Unit.__name__, i)))
 
     def on_pause(self):
         return True
