@@ -13,7 +13,7 @@ BoxLayout:
                 with_previous: True
     GridLayout:
         id: grid
-        cols: root.width / 120 or 1
+        cols: 2 if root.width < root.height else 4
         size_hint: (1, 1)
 
 <BulbImage@ToggleButtonBehavior+Image>:
@@ -27,6 +27,8 @@ BoxLayout:
 <Dimmer>:
     image: image
     slider: slider
+    size_hint_y: None
+    height: 1.25 * image.height
     BulbImage:
         id: image
         on_press: root.on_press()
@@ -45,6 +47,8 @@ BoxLayout:
 
 <Relay>:
     image: image
+    size_hint_y: None
+    height: 1.25 * image.height
     BulbImage:
         id: image
         on_press: root.on_press()
