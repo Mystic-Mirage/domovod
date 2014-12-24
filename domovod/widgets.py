@@ -19,15 +19,14 @@ class Dimmer(RelativeLayout):
         self.label = label
         self.value = value
         self.old_value = ON
+        self.image.texture = self.textures[value]
 
     def on_press(self):
         if self.image.state == 'down':
-            self.slider.value = self.old_value
-            self.image.texture = self.textures[self.old_value]
+            self.value = self.old_value
         else:
-            self.old_value = self.slider.value
-            self.slider.value = OFF
-            self.image.texture = self.textures[OFF]
+            self.old_value = self.value
+            self.value = OFF
 
     def on_value(self):
         self.image.state = 'normal' if self.value == OFF else 'down'
@@ -40,8 +39,6 @@ class Dimmer(RelativeLayout):
     @value.setter
     def value(self, value):
         if OFF <= value <= ON:
-            self.image.state = 'normal' if value == OFF else 'down'
-            self.image.texture = self.textures[value]
             self.slider.value = value
 
 
@@ -55,6 +52,7 @@ class Relay(RelativeLayout):
                          for k in (OFF, ON)}
         self.label = label
         self.value = value
+        self.image.texture = self.textures[value]
 
     def on_press(self):
         self.image.texture = self.textures[self.value]
@@ -67,4 +65,3 @@ class Relay(RelativeLayout):
     def value(self, value):
         if value in (OFF, ON):
             self.image.state = 'down' if value == ON else 'normal'
-            self.image.texture = self.textures[value]
