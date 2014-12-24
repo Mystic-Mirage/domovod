@@ -12,11 +12,13 @@ class Dimmer(RelativeLayout):
     slider = ObjectProperty()
     label = StringProperty()
 
-    def __init__(self, label, value=OFF):
+    def __init__(self, label, device, channel, value=OFF):
         super(Dimmer, self).__init__()
         self.textures = {k: Image('data/bulb/%03d.png' % k).texture
                          for k in range(OFF, ON) + [ON]}
         self.label = label
+        self.device = device
+        self.channel = channel
         self.value = value
         self.old_value = ON
         self.image.texture = self.textures[value]
@@ -31,6 +33,7 @@ class Dimmer(RelativeLayout):
     def on_value(self):
         self.image.state = 'normal' if self.value == OFF else 'down'
         self.image.texture = self.textures[self.value]
+        self.device.channel(self.channel, self.value)
 
     @property
     def value(self):
@@ -46,16 +49,19 @@ class Relay(RelativeLayout):
     image = ObjectProperty()
     label = StringProperty()
 
-    def __init__(self, label, value=OFF):
+    def __init__(self, label, device, channel, value=OFF):
         super(Relay, self).__init__()
         self.textures = {k: Image('data/bulb/%03d.png' % k).texture
                          for k in (OFF, ON)}
         self.label = label
+        self.device = device
+        self.channel = channel
         self.value = value
         self.image.texture = self.textures[value]
 
     def on_press(self):
         self.image.texture = self.textures[self.value]
+        self.device.channel(self.channel, self.value)
 
     @property
     def value(self):
