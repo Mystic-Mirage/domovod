@@ -1,73 +1,94 @@
 from kivy.core.image import Image
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import (
+    BooleanProperty,
+    NumericProperty,
+    ObjectProperty,
+    StringProperty,
+)
 from kivy.uix.relativelayout import RelativeLayout
-
-
-OFF = 0
-ON = 100
 
 
 class Dimmer(RelativeLayout):
     image = ObjectProperty()
-    slider = ObjectProperty()
     label = StringProperty()
+    slider = ObjectProperty()
+    value = NumericProperty()
 
-    def __init__(self, label, device, channel, value=OFF):
+    def __init__(self, label, value=None, callback=None,
+                 min_value=0, max_value=255, step=1,
+                 bottom=None, top=None):
         super(Dimmer, self).__init__()
-        self.textures = {k: Image('data/bulb/%03d.png' % k).texture
-                         for k in range(OFF, ON) + [ON]}
+        if bottom is None:
+            bottom = min_value
+        if top is None:
+            top = max_value
+        self.textures = {
+            key: Image('data/bulb/{0:03d}.png'.format(value)).texture
+            for key, value in [
+                (v, int(float(v) / (top - bottom) * 100))
+                for v in range(min_value, max_value, step) + [max_value]
+            ]
+        }
         self.label = label
-        self.device = device
-        self.channel = channel
-        self.value = value
-        self.old_value = ON
-        self.image.texture = self.textures[value]
+        self.value = min_value if value is None else value
+        self.image.texture = self.textures[self.value]
+        self.slider.min = min_value
+        self.slider.max = max_value
+        self.slider.step = step
+        self.old_value = max_value
+        if callback is not None:
+            self.callback = callback
+        self.min = min_value
+        self.max = max_value
+
+    def callback(self, value):
+        print value
 
     def on_press(self):
         if self.image.state == 'down':
-            self.value = self.old_value
+            value = self.old_value
         else:
             self.old_value = self.value
-            self.value = OFF
+            value = self.min
+        self.value = value
+        self.callback(value)
 
-    def on_value(self):
-        self.image.state = 'normal' if self.value == OFF else 'down'
-        self.image.texture = self.textures[self.value]
-        self.device.channel(self.channel, self.value)
+    def on_slider_value(self):
+        old_value = self.value
+        value = int(self.slider.value)
+        self.value = value
+        if value != old_value:
+            self.callback(value)
 
-    @property
-    def value(self):
-        return int(self.slider.value)
-
-    @value.setter
-    def value(self, value):
-        if OFF <= value <= ON:
-            self.slider.value = value
+    def on_value(self, _, value):
+        self.image.state = 'normal' if value == self.min else 'down'
+        self.image.texture = self.textures[value]
+        self.slider.value = value
 
 
 class Relay(RelativeLayout):
     image = ObjectProperty()
     label = StringProperty()
+    value = BooleanProperty()
 
-    def __init__(self, label, device, channel, value=OFF):
+    def __init__(self, label, value=False, callback=None):
         super(Relay, self).__init__()
-        self.textures = {k: Image('data/bulb/%03d.png' % k).texture
-                         for k in (OFF, ON)}
+        self.textures = {
+            key: Image('data/bulb/{0:03d}.png'.format(value)).texture
+            for key, value in ((False, 0), (True, 100))
+        }
         self.label = label
-        self.device = device
-        self.channel = channel
         self.value = value
-        self.image.texture = self.textures[value]
+        if callback is not None:
+            self.callback = callback
+
+    def callback(self, value):
+        pass
 
     def on_press(self):
-        self.image.texture = self.textures[self.value]
-        self.device.channel(self.channel, self.value)
+        value = not self.value
+        self.value = value
+        self.callback(value)
 
-    @property
-    def value(self):
-        return ON if self.image.state == 'down' else OFF
-
-    @value.setter
-    def value(self, value):
-        if value in (OFF, ON):
-            self.image.state = 'down' if value == ON else 'normal'
+    def on_value(self, _, value):
+        self.image.texture = self.textures[value]

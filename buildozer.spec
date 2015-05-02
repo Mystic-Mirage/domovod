@@ -32,6 +32,7 @@ version.filename = %(source.dir)s/main.py
 # version = 1.2.0
 
 # (list) Application requirements
+# comma seperated e.g. requirements = sqlite3,kivy
 requirements = kivy
 
 # (list) Garden requirements
@@ -143,7 +144,7 @@ android.permissions = INTERNET
 [buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
-log_level = 1
+log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
 warn_on_root = 1

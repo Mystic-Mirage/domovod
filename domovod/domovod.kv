@@ -34,10 +34,7 @@ BoxLayout:
         on_press: root.on_press()
     Slider:
         id: slider
-        min: 0
-        max: 100
-        step: 1
-        on_value: root.on_value()
+        on_value: root.on_slider_value()
         orientation: 'vertical'
         pos_hint: {'center_x': .6 + .25 * image.height / image.width, 'center_y': .6}
         size_hint: (.3 * image.height / image.width, .8)
