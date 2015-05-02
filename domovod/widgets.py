@@ -42,7 +42,7 @@ class Dimmer(RelativeLayout):
             self.callback = callback
 
     def callback(self, value):
-        print value
+        pass
 
     def on_press(self):
         if self.image.state == 'down':
