@@ -30,16 +30,16 @@ class Dimmer(RelativeLayout):
             ]
         }
         self.label = label
+        self.old_value = max_value
+        self.min = min_value
+        self.max = max_value
         self.value = min_value if value is None else value
         self.image.texture = self.textures[self.value]
         self.slider.min = min_value
         self.slider.max = max_value
         self.slider.step = step
-        self.old_value = max_value
         if callback is not None:
             self.callback = callback
-        self.min = min_value
-        self.max = max_value
 
     def callback(self, value):
         print value
