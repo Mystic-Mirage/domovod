@@ -13,7 +13,7 @@ BoxLayout:
                 with_previous: True
     GridLayout:
         id: grid
-        cols: 1 if len(self.children) < 3 else 2 if root.width < root.height else 4
+        cols: 1 if len(self.children) < 3 and root.width < root.height else 2 if root.width < root.height else 4
         size_hint: (1, 1)
 
 <BulbImage@ToggleButtonBehavior+Image>:
