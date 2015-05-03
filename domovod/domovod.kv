@@ -13,22 +13,22 @@ BoxLayout:
                 with_previous: True
     GridLayout:
         id: grid
-        cols: 2 if root.width < root.height else 4
+        cols: 1 if len(self.children) < 3 else 2 if root.width < root.height else 4
         size_hint: (1, 1)
 
 <BulbImage@ToggleButtonBehavior+Image>:
     allow_stretch: True
-    pos_hint: {'center_y': .6}
-    size_hint_y: .8
+    pos_hint: {'center_x': .5, 'center_y': .6}
+    size_hint_x: .6
+    size_hint_y: .6
 
 <BulbLabel@Label>:
+    pos_hint: {'center_y': .1}
     size_hint_y: .2
 
 <Dimmer>:
     image: image
     slider: slider
-    size_hint_y: None
-    height: 1.25 * image.height
     BulbImage:
         id: image
         on_press: root.on_press()
@@ -39,16 +39,12 @@ BoxLayout:
         pos_hint: {'center_x': .6 + .25 * image.height / image.width, 'center_y': .6}
         size_hint: (.3 * image.height / image.width, .8)
     BulbLabel:
-        pos_hint: {'center_y': .1 * image.height / image.width}
         text: root.label
 
 <Relay>:
     image: image
-    size_hint_y: None
-    height: 1.25 * image.height
     BulbImage:
         id: image
         on_press: root.on_press()
     BulbLabel:
-        pos_hint: {'center_y': .1 * image.height / image.width}
         text: root.label
