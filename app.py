@@ -1,6 +1,6 @@
 from kivy.app import App
 
-from widgets import Dimmer, Relay
+from dummy import Dimmer, Relay
 
 
 class DomoVodApp(App):
@@ -11,8 +11,8 @@ class DomoVodApp(App):
         self.root.prev.title = 'Room 1'
         relay = Relay('Relay 1')
         dimmer = Dimmer('Dimmer 1')
-        self.root.grid.add_widget(relay)
-        self.root.grid.add_widget(dimmer)
+        self.root.grid.add_widget(relay.widget)
+        self.root.grid.add_widget(dimmer.widget)
 
     def on_pause(self):
         return True
