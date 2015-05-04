@@ -1,7 +1,7 @@
 import kivy
 from kivy.config import Config
 
-from app import DomoVodApp
+from domovod import DomoVodApp
 
 
 kivy.require('1.9.0')
