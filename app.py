@@ -1,6 +1,6 @@
 from kivy.app import App
 
-from domovod.widgets import Dimmer, Relay
+from widgets import Dimmer, Relay
 
 
 class DomoVodApp(App):
