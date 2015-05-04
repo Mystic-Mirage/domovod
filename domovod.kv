@@ -1,20 +1,37 @@
 #:kivy 1.9
+#:import la kivy.adapters.listadapter
+#:import dv domovod
 
-BoxLayout:
-    orientation: 'vertical'
-    grid: grid
+DomoVodNavigation:
+    listview: listview
     prev: prev
-    ActionBar:
-        pos_hint: {'top': 1}
-        ActionView:
-            ActionPrevious:
-                id: prev
-                app_icon: 'data/icon.png'
-                with_previous: True
-    GridLayout:
-        id: grid
-        cols: 1 if len(self.children) < 3 and root.width < root.height else 2 if root.width < root.height else 4
-        size_hint: (1, 1)
+    grid: grid
+    BoxLayout:
+        ListView:
+            id: listview
+            adapter:
+                la.ListAdapter(data=[],
+                cls=dv.DomoVodListItem,
+                selection_mode='single',
+                allow_empty_selection=False)
+    BoxLayout:
+        orientation: 'vertical'
+        ActionBar:
+            pos_hint: {'top': 1}
+            ActionView:
+                ActionPrevious:
+                    id: prev
+                    app_icon: 'data/icon.png'
+                    with_previous: True
+                    on_press: root.toggle_state()
+        GridLayout:
+            id: grid
+            cols: 1 if len(self.children) < 3 and root.width < root.height else 2 if root.width < root.height else 4
+            size_hint: (1, 1)
+
+<DomoVodListItem>:
+    height: '50sp'
+    selected_color: [.2, .7, .9, 1]
 
 <BulbImage@ToggleButtonBehavior+Image>:
     allow_stretch: True
@@ -36,7 +53,7 @@ BoxLayout:
         id: slider
         on_value: root.on_slider_value()
         orientation: 'vertical'
-        pos_hint: {'center_x': .6 + .25 * image.height / image.width, 'center_y': .6}
+        pos_hint: {'center_x': .55 + .225 * image.height / image.width, 'center_y': .6}
         size_hint: (.3 * image.height / image.width, .8)
     BulbLabel:
         text: root.label
